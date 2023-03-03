@@ -266,12 +266,6 @@ require('telescope').setup {
       },
     },
   },
-  extensiosn = {
-    fzf = {
-      fuzzy = true,
-      case_mode = "smart_case",
-    }
-  },
 }
 
 
