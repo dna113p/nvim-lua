@@ -23,8 +23,12 @@ require('packer').startup(function(use)
 
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
+
     },
   }
+
+      -- Java
+  use 'mfussenegger/nvim-jdtls'
 
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -190,6 +194,11 @@ vim.api.nvim_create_autocmd('InsertEnter', {
   end
 })
 
+
+
+
+require('nvim-surround').setup()
+
 require('neoscroll').setup({
   easing_function = "sine"
 })
@@ -247,9 +256,14 @@ require('telescope').setup {
       },
     },
   },
+  extensiosn = {
+    fzf = {
+      fuzzy = true,
+      case_mode = "smart_case",
+    }
+  },
 }
 
-require('nvim-surround').setup()
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -265,7 +279,7 @@ vim.keymap.set('n', '<leader>f/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
-vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -384,7 +398,7 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
-local servers = {
+local lang_servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
@@ -412,7 +426,7 @@ require('mason').setup()
 local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
+  ensure_installed = vim.tbl_keys(lang_servers),
 }
 
 mason_lspconfig.setup_handlers {
@@ -420,7 +434,7 @@ mason_lspconfig.setup_handlers {
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = servers[server_name],
+      settings = lang_servers[server_name],
     }
   end,
 }
