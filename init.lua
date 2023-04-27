@@ -115,6 +115,9 @@ if is_bootstrap then
   return
 end
 
+local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
+local home = os.getenv(is_windows and 'HOMEPATH' or 'HOME')
+
 local in_wsl = os.getenv('WSL_DISTRO_NAME')
 if in_wsl then
     vim.g.clipboard = {
@@ -134,7 +137,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 
-local system_node = vim.fn.trim(vim.fn.system('cd ~ && volta which node'))
+local system_node = vim.fn.trim(vim.fn.system('cd'..home.. '&& volta which node'))
 if vim.fn.executable('volta') == 1 then
   vim.g.node_host_prog = system_node
 end
@@ -350,7 +353,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin')
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'lua', 'python', 'rust', 'typescript', 'javascript', 'help', 'vim', 'css', 'scss', 'java', 'html' },
+  ensure_installed = { 'c', 'lua', 'python', 'rust', 'typescript', 'javascript', 'vimdoc', 'vim', 'css', 'scss', 'java', 'html' },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
