@@ -32,7 +32,7 @@ require('packer').startup(function(use)
 
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip',  },
   }
 
   use { -- Highlight, edit, and navigate code
@@ -41,6 +41,11 @@ require('packer').startup(function(use)
       pcall(require('nvim-treesitter.install').update { with_sync = true })
     end,
   }
+
+  use({
+    'Wansmer/treesj',
+    requires = { 'nvim-treesitter' }
+  })
 
   use { -- Additional text objects via treesitter
     'nvim-treesitter/nvim-treesitter-textobjects',
@@ -66,6 +71,11 @@ require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
+  use{ 'dpayne/CodeGPT.nvim', requires = {
+    'nvim-lua/plenary.nvim',
+    'MunifTanjim/nui.nvim'
+  }}
+
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
 
@@ -76,6 +86,10 @@ require('packer').startup(function(use)
   use 'karb94/neoscroll.nvim'
 
   use 'windwp/nvim-autopairs'
+
+  use 'zbirenbaum/copilot.lua'
+  use { "zbirenbaum/copilot-cmp", requires ={'copilot.lua'} }
+
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -101,6 +115,16 @@ if is_bootstrap then
   return
 end
 
+local in_wsl = os.getenv('WSL_DISTRO_NAME')
+if in_wsl then
+    vim.g.clipboard = {
+        name = 'wsl clipboard',
+        copy =  { ["+"] = { "clip.exe" },   ["*"] = { "clip.exe" } },
+        paste = { ["+"] = { "nvim_paste" }, ["*"] = { "nvim_paste" } },
+        cache_enabled = true
+    }
+end
+
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
@@ -110,8 +134,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 
+local system_node = vim.fn.trim(vim.fn.system('cd ~ && volta which node'))
 if vim.fn.executable('volta') == 1 then
-  vim.g.node_host_prog = vim.fn.trim(vim.fn.system('cd ~ && volta which node'))
+  vim.g.node_host_prog = system_node
 end
 
 -- [[ Setting options ]]
@@ -218,11 +243,9 @@ require('lualine').setup {
 require('Comment').setup({
   toggler = {
     line = '<C-_>',
-    block = '<C-_>',
   },
   opleader = {
     line = '<C-_>',
-    block = '<C-_>',
   }
 })
 
@@ -249,6 +272,10 @@ require('gitsigns').setup {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    layout_config = {
+      height = 0.95,
+      width = 0.90,
+    },
     vimgrep_arguments = {
       "rg",
       "--hidden",
@@ -263,6 +290,14 @@ require('telescope').setup {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
+        ["<C-j>"] = {
+          require('telescope.actions').move_selection_next, type = "action",
+          opts = { nowait = true, silent = true }
+        },
+        ["<C-k>"] = {
+          require('telescope.actions').move_selection_previous, type = "action",
+          opts = { nowait = true, silent = true }
+        },
       },
     },
   },
@@ -272,23 +307,44 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>f/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
+  require('telescope.builtin')
+  .current_buffer_fuzzy_find(require('telescope.themes')
+    .get_dropdown {
+      winblend = 10,
+      previewer = false,
+    })
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
-vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<C-p>', function()
+  require('telescope.builtin')
+  .find_files({
+    find_command={"rg","--ignore","--hidden","--glob", "!**/.git/**", "--files"
+    },prompt_prefix="🔍 "})
+end, { desc = '[S]earch [F]iles' })
+
+-- See `:help telescope.builtin`
+vim.keymap.set('n', '<leader>?', require('telescope.builtin')
+  .oldfiles, { desc = '[?] Find recently opened files' })
+
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin')
+  .buffers, { desc = '[ ] Find existing buffers' })
+
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin')
+  .find_files, { desc = '[S]earch [F]iles' })
+
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin')
+  .help_tags, { desc = '[S]earch [H]elp' })
+
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin')
+  .grep_string, { desc = '[S]earch current [W]ord' })
+
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin')
+  .live_grep, { desc = '[S]earch by [G]rep' })
+
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin')
+  .diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -405,8 +461,7 @@ end
 local lang_servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
+  emmet_ls = {},
   tsserver = { },
   lua_ls = {
     Lua = {
@@ -415,6 +470,14 @@ local lang_servers = {
     },
   },
 }
+
+require('copilot').setup({
+  suggestion = { enabled = false },
+  panel = { enabled = false },
+  copilot_node_command = system_node
+})
+
+require("copilot_cmp").setup({ })
 
 -- Setup neovim lua configuration
 require('neodev').setup()
@@ -484,12 +547,14 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
+    { name = 'copilot'},
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
 }
 
 require("nvim-autopairs").setup()
+require('treesj').setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
