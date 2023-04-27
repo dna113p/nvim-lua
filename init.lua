@@ -137,7 +137,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 
-local system_node = vim.fn.trim(vim.fn.system('cd'..home.. '&& volta which node'))
+local system_node = vim.fn.trim(vim.fn.system('cd '..home.. ' && volta which node'))
 if vim.fn.executable('volta') == 1 then
   vim.g.node_host_prog = system_node
 end
