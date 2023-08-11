@@ -68,11 +68,6 @@ return {
     end
   },
 
-  {
-    'dpayne/CodeGPT.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'MunifTanjim/nui.nvim' }
-  },
-
   { 'kylechui/nvim-surround',
     config = function() require('nvim-surround').setup() end
   },
@@ -117,6 +112,6 @@ return {
         ['*'] = require('distant.settings').chip_default()
       }
     end
-  }
+  },
 
 }

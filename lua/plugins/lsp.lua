@@ -34,13 +34,21 @@ local LspZero = {
 function LspZero.config()
   local lsp = require('lsp-zero').preset({})
 
-  lsp.setup_servers({
-    'tsserver',
-    'eslint',
-    'emmet_ls',
-    'lua_ls',
-    'rust_analyzer',
-  })
+  require("mason-lspconfig").setup {
+    ensure_installed = {
+      'tsserver',
+      'eslint',
+      'emmet_ls',
+      'lua_ls',
+      'rust_analyzer',
+      'marksman',
+      'jdtls',
+      'tailwindcss',
+      'html',
+      'pyright',
+      'denols'
+    }
+  }
 
   lsp.on_attach(function(client, bufnr)
     lsp.default_keymaps({ buffer = bufnr })

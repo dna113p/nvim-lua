@@ -6,7 +6,22 @@ local Treesitter = {
 function Treesitter.config()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'lua', 'python', 'rust', 'typescript', 'javascript', 'vimdoc', 'vim', 'css', 'scss', 'java', 'html' },
+    ensure_installed = {
+      'c',
+      'lua',
+      'python',
+      'rust',
+      'typescript',
+      'javascript',
+      'vimdoc',
+      'vim',
+      'css',
+      'scss',
+      'java',
+      'html',
+      'markdown',
+      'markdown_inline',
+    },
 
     highlight = { enable = true },
     indent = { enable = true, disable = { 'python' } },
