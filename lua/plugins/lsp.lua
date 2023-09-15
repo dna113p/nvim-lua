@@ -46,7 +46,7 @@ function LspZero.config()
       'tailwindcss',
       'html',
       'pyright',
-      'denols'
+      -- 'denols'
     }
   }
 

@@ -11,4 +11,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup('plugins')
+local source_path = vim.g.home .. "/Source"
+require('lazy').setup('plugins', {
+  dev = {
+    path = source_path
+  }
+})

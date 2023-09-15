@@ -84,5 +84,5 @@ end
 return {
   Treesitter,
   {'nvim-treesitter/nvim-treesitter-textobjects'},
-  {'nvim-treesitter/playground'}
+  {'nvim-treesitter/nvim-treesitter-context'}
 }
