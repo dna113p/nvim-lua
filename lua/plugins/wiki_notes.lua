@@ -1,18 +1,4 @@
 return {
-  -- {
-  --   'vimwiki/vimwiki',
-  --   init = function()
-  --     vim.g.vimwiki_list = {
-  --       {
-  --         path = '/mnt/d/vault/',
-  --         syntax = 'markdown',
-  --         ext = '.md'
-  --       }
-  --     }
-  --   end
-  -- },
-
-
   -- { 'willydeliege/markdowntasks', dev = true },
   {
     'jakewvincent/mkdnflow.nvim',
