@@ -1,4 +1,7 @@
-local Telescope = { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', cond = vim.fn.executable 'make' == 1 }
+local Telescope = { 
+  'nvim-telescope/telescope-fzf-native.nvim',
+  build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+}
 local Fzf = { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } }
 
 -- [[ Configure Telescope ]]

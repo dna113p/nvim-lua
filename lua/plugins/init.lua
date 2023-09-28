@@ -32,10 +32,17 @@ return {
 
   {
     'lukas-reineke/indent-blankline.nvim',
+    main = "ibl",
+    opts = {},
     config = function()
-      require('indent_blankline').setup {
-        char = '┊',
-        show_trailing_blankline_indent = false,
+      local highlight = {
+        "CursorColumn",
+        "Whitespace"
+      }
+      require('ibl').setup {
+        indent = {highlight = highlight, char = "" },
+        whitespace = { highlight = highlight, remove_blankline_trail = false },
+        scope = { enabled = false }
       }
     end
   },
@@ -107,6 +114,7 @@ return {
 
   {
     'chipsenkbeil/distant.nvim',
+    cond = not vim.g.is_windows,
     config = function()
       require('distant').setup {
         ['*'] = require('distant.settings').chip_default()

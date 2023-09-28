@@ -15,24 +15,31 @@ function Treesitter.config()
 
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = {
-      'c',
-      'lua',
-      'python',
-      'rust',
-      'typescript',
-      'javascript',
-      'vimdoc',
-      'vim',
-      'css',
-      'scss',
-      'java',
-      'xml',
-      'html',
-      'markdown',
-      'markdown_inline',
-      'md_taskwarrior'
-    },
+    ensure_installed = (function()
+      local languagues = {
+        'c',
+        'lua',
+        'python',
+        'rust',
+        'typescript',
+        'javascript',
+        'vimdoc',
+        'vim',
+        'css',
+        'scss',
+        'java',
+        'xml',
+        'html',
+        'markdown',
+        'markdown_inline',
+      }
+
+      if not vim.g.is_windows then
+        table.insert(languagues, 'md_taskwarrior')
+      end
+      return languagues
+    end)(),
+
 
     highlight = { enable = true },
     indent = { enable = true, disable = { 'python' } },
