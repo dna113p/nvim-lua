@@ -1,20 +1,20 @@
 return {
   {
-    'Wansmer/treesj',
+    'Wansmer/treesj', -- Split and join blocks of code
     dependencies = { 'nvim-treesitter' },
     config = function()
       require('treesj').setup()
     end,
   },
 
-  { 'tpope/vim-fugitive' },
+  { 'tpope/vim-fugitive' }, -- Git extension
 
-  { 'tpope/vim-rhubarb' },
+  { 'tpope/vim-rhubarb' }, -- Github specifically extension
 
-  { 'tpope/vim-sleuth' },
+  { 'tpope/vim-sleuth' }, -- automatically tries to adjust spacing based on file heuristics
 
   {
-    'lewis6991/gitsigns.nvim',
+    'lewis6991/gitsigns.nvim', -- git status in gutters
     config = function()
       require('gitsigns').setup {
         signs = {
@@ -28,10 +28,10 @@ return {
     end
   },
 
-  { 'chaoren/vim-wordmotion' },
+  { 'chaoren/vim-wordmotion' }, -- changes word jumps for CamelCase and underscore
 
   {
-    'lukas-reineke/indent-blankline.nvim',
+    'lukas-reineke/indent-blankline.nvim', -- indentation guides
     main = "ibl",
     opts = {},
     config = function()
@@ -47,7 +47,7 @@ return {
     end
   },
 
-  { 'numToStr/Comment.nvim',
+  { 'numToStr/Comment.nvim', -- comment toggling
     config = function()
       require('Comment').setup({
         toggler = {
@@ -75,11 +75,11 @@ return {
     end
   },
 
-  { 'kylechui/nvim-surround',
+  { 'kylechui/nvim-surround', -- Add/change/delete surrounding pairs
     config = function() require('nvim-surround').setup() end
   },
 
-  { 'karb94/neoscroll.nvim',
+  { 'karb94/neoscroll.nvim', -- smooth scroll for things like C-u, C-d
     config = function()
       require('neoscroll').setup({
         easing_function = "sine"
@@ -87,7 +87,7 @@ return {
     end
   },
 
-  { 'windwp/nvim-autopairs',
+  { 'windwp/nvim-autopairs', -- auto closes brackets/qutoes
     config = function()
       require("nvim-autopairs").setup()
     end
@@ -112,14 +112,14 @@ return {
     end
   },
 
-  {
-    'chipsenkbeil/distant.nvim',
-    cond = not vim.g.is_windows,
-    config = function()
-      require('distant').setup {
-        ['*'] = require('distant.settings').chip_default()
-      }
-    end
-  },
+  -- {
+  --   'chipsenkbeil/distant.nvim', --easily edit remote files
+  --   cond = not vim.g.is_windows,
+  --   config = function()
+  --     require('distant').setup {
+  --       ['*'] = require('distant.settings').chip_default()
+  --     }
+  --   end
+  -- },
 
 }

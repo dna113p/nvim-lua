@@ -13,6 +13,5 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.o.completeopt = 'menuone,noselect'
 vim.o.ea = false
-vim.o.scrolloff = 10 
+vim.o.scrolloff = 10
 vim.wo.conceallevel = 2
---vim.o.backupcopy = true -- If live reload doesn't work, try uncommenting
