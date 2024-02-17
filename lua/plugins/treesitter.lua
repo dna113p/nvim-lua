@@ -5,13 +5,6 @@ local Treesitter = {
 
 function Treesitter.config()
 
-  local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-  parser_config.md_taskwarrior = {
-    install_info = {
-      url = "/home/dj/Source/tree-sitter-md-taskwarrior",
-      files = {"src/parser.c"},
-    }
-  }
 
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
@@ -34,9 +27,6 @@ function Treesitter.config()
         'markdown_inline',
       }
 
-      if not vim.g.is_windows then
-        table.insert(languagues, 'md_taskwarrior')
-      end
       return languagues
     end)(),
 

@@ -15,3 +15,4 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.ea = false
 vim.o.scrolloff = 10
 vim.wo.conceallevel = 2
+vim.o.autoread = true

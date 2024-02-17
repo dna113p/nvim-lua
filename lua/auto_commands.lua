@@ -42,3 +42,14 @@ vim.api.nvim_create_autocmd('InsertEnter', {
 -- Custom Vim commands to toggle relative line numbers
 vim.cmd("command! EnableAutoLines lua Enable_auto_lines()")
 vim.cmd("command! DisableAutoLines lua Disable_auto_lines()")
+
+-- Auto read files when changed
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { "*" },
+})
+vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
+  command = 'echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None',
+  pattern = { "*" },
+})
+
