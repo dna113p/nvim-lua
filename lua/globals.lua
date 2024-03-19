@@ -4,7 +4,6 @@ vim.g.home = os.getenv(vim.g.is_windows and 'HOMEPATH' or 'HOME')
 
 vim.g.in_wsl = os.getenv('WSL_DISTRO_NAME')
 
-
 if vim.g.in_wsl then
     vim.g.clipboard = {
         name = 'wsl clipboard',
