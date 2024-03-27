@@ -18,3 +18,10 @@ if vim.fn.executable('volta') == 1 then
     vim.g.node_host_prog = vim.g.system_node
     vim.g.copilot_node_command = vim.g.system_node
 end
+
+P = function(v)
+    print(vim.inspect(v))
+    return v
+end
+
+
