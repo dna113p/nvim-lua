@@ -6,10 +6,16 @@ vim.g.in_wsl = os.getenv('WSL_DISTRO_NAME')
 
 if vim.g.in_wsl then
     vim.g.clipboard = {
-        name = 'wsl clipboard',
-        copy =  { ["+"] = { "clip.exe" },   ["*"] = { "clip.exe" } },
-        paste = { ["+"] = { "nvim_paste" }, ["*"] = { "nvim_paste" } },
-        cache_enabled = true
+        name = 'WslClipboard',
+        copy = {
+            ['+'] = 'clip.exe',
+            ['*'] = 'clip.exe',
+        },
+        paste = {
+            ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        },
+        cache_enabled = 0,
     }
 end
 

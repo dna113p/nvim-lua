@@ -7,26 +7,7 @@ return {
     end,
   },
 
-  { 'tpope/vim-fugitive' }, -- Git extension
-
-  { 'tpope/vim-rhubarb' }, -- Github specifically extension
-
   { 'tpope/vim-sleuth' }, -- automatically tries to adjust spacing based on file heuristics
-
-  {
-    'lewis6991/gitsigns.nvim', -- git status in gutters
-    config = function()
-      require('gitsigns').setup {
-        signs = {
-          add = { text = '+' },
-          change = { text = '~' },
-          delete = { text = '_' },
-          topdelete = { text = '‾' },
-          changedelete = { text = '~' },
-        },
-      }
-    end
-  },
 
   { 'chaoren/vim-wordmotion' }, -- changes word jumps for CamelCase and underscore
 
