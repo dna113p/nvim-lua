@@ -21,8 +21,7 @@ end
 
 if vim.fn.executable('volta') == 1 then
     vim.g.system_node = vim.fn.trim(vim.fn.system('cd '..vim.g.home.. ' && volta which node'))
-    vim.g.node_host_prog = vim.g.system_node
-    vim.g.copilot_node_command = vim.g.system_node
+    vim.g.node_host_prog = vim.fn.trim(vim.fn.system("volta which neovim-node-host"))
 end
 
 P = function(v)

@@ -74,24 +74,24 @@ return {
     end
   },
 
-  {
-    'zbirenbaum/copilot.lua',
-    config = function()
-      require('copilot').setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-        copilot_node_command = vim.g.system_node,
-      })
-    end
-  },
+  -- {
+  --   'zbirenbaum/copilot.lua',
+  --   config = function()
+  --     require('copilot').setup({
+  --       suggestion = { enabled = false },
+  --       panel = { enabled = false },
+  --       copilot_node_command = vim.g.system_node,
+  --     })
+  --   end
+  -- },
 
-  {
-    'zbirenbaum/copilot-cmp',
-    dependencies = { 'zbirenbaum/copilot.lua' },
-    config = function()
-      require("copilot_cmp").setup({})
-    end
-  },
+  -- {
+  --   'zbirenbaum/copilot-cmp',
+  --   dependencies = { 'zbirenbaum/copilot.lua' },
+  --   config = function()
+  --     require("copilot_cmp").setup({})
+  --   end
+  -- },
 
   -- {
   --   'chipsenkbeil/distant.nvim', --easily edit remote files
