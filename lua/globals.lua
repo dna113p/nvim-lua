@@ -20,7 +20,7 @@ if vim.g.in_wsl then
 end
 
 if vim.fn.executable('volta') == 1 then
-    vim.g.system_node = vim.fn.trim(vim.fn.system('cd '..vim.g.home.. ' && volta which node'))
+--     vim.g.system_node = vim.fn.trim(vim.fn.system('cd '..vim.g.home.. ' && volta which node'))
     vim.g.node_host_prog = vim.fn.trim(vim.fn.system("volta which neovim-node-host"))
 end
 
