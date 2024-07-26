@@ -22,5 +22,9 @@ return {
       "nvim-telescope/telescope.nvim", -- optional
     },
     config = true
+  },
+
+  {
+     "sindrets/diffview.nvim"
   }
 }

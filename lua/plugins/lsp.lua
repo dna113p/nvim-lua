@@ -164,7 +164,6 @@ return {
       require('mason-lspconfig').setup({
         ensure_installed = {
           -- 'tsserver',
-          -- 'vtsls',
           -- 'eslint',
           'emmet_ls',
           'lua_ls',
@@ -172,7 +171,7 @@ return {
           -- 'marksman',
           'markdown_oxide',
           -- 'jdtls',
-          'tailwindcss',
+          -- 'tailwindcss',
           'html',
           'pyright',
           'stylelint_lsp',
@@ -191,6 +190,12 @@ return {
             -- (Optional) Configure lua language server for neovim
             local lua_opts = lsp_zero.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
+          end,
+
+          vtsls = function()
+            require('lspconfig').vtsls.setup({
+              cmd = { "volta", "run", "vtsls", "--stdio" }
+            })
           end,
                   
         }
