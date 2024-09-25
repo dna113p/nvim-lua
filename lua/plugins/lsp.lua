@@ -7,11 +7,16 @@ return {
         keymaps = {
           accept_suggestion = "<Tab>",
           clear_suggestion = "<C-]>",
-          accept_word = "<C-j>",
+          accept_word = "<C-0>",
+        },
+        color = {
+          suggestion_color = "#358282",
+          cterm = 244,
         },
       })
     end,
   },
+
   {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
@@ -69,7 +74,7 @@ return {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
           },
-          ['<Tab>'] = cmp.mapping(function(fallback)
+          ['<C-j>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -78,7 +83,7 @@ return {
               fallback()
             end
           end, { 'i', 's' }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
+          ['<C-k>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
             elseif luasnip.jumpable( -1) then
@@ -163,7 +168,7 @@ return {
 
       require('mason-lspconfig').setup({
         ensure_installed = {
-          -- 'tsserver',
+          -- 'ts_ls',
           -- 'eslint',
           'emmet_ls',
           'lua_ls',

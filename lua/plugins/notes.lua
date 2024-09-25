@@ -4,8 +4,7 @@ return {
     config = function()
       -- Execute this command when Neovim starts, setting the Taskwiki sort order
       vim.g.taskwiki_sort_orders = {
-        P = 'priority-',
-        U = 'urgency-',
+        O = 'entry-'
       }
 
       -- Function to set Taskwiki keybindings with descriptions

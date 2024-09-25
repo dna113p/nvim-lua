@@ -56,8 +56,10 @@ function Telescope.config()
   vim.keymap.set('n', '<C-p>', function()
     require('telescope.builtin')
     .find_files({
-      find_command={"rg","--ignore","--hidden","--glob", "!**/.git/**", "--files"
-    },prompt_prefix="🔍 "})
+      -- find_command={"rg","--ignore","--hidden","--glob", "!**/.git/**", "--files" },
+      find_command={"fd", "--no-require-git"},
+      prompt_prefix="🔍 ",
+    })
   end, { desc = '[S]earch [F]iles' })
 
   -- See `:help telescope.builtin`

@@ -17,3 +17,4 @@ vim.o.scrolloff = 10
 vim.wo.conceallevel = 2
 vim.o.autoread = true
 vim.o.showtabline = 2
+vim.o.laststatus = 3
