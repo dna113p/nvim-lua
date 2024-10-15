@@ -168,19 +168,17 @@ return {
 
       require('mason-lspconfig').setup({
         ensure_installed = {
-          -- 'ts_ls',
-          -- 'eslint',
+          'prettierd',
           'emmet_ls',
           'lua_ls',
           'rust_analyzer',
-          -- 'marksman',
           'markdown_oxide',
-          -- 'jdtls',
-          -- 'tailwindcss',
+          'tailwindcss',
           'html',
           'pyright',
           'stylelint_lsp',
-          'biome',
+          -- 'denols',
+          -- 'biome',
           'vtsls',
         },
         handlers = {
