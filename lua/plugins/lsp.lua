@@ -168,7 +168,6 @@ return {
 
       require('mason-lspconfig').setup({
         ensure_installed = {
-          'prettierd',
           'emmet_ls',
           'lua_ls',
           'rust_analyzer',
