@@ -13,7 +13,12 @@ return {
 		},
 
 		config = function()
-			require("telescope").setup({
+			local telescope = require("telescope")
+			local actions = require("telescope.actions")
+			local builtin = require("telescope.builtin")
+			local themes = require("telescope.themes")
+
+			telescope.setup({
 				defaults = {
 					layout_config = {
 						height = 0.95,
@@ -31,15 +36,16 @@ return {
 					},
 					mappings = {
 						i = {
+							["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
 							["<C-u>"] = false,
 							["<C-d>"] = false,
 							["<C-j>"] = {
-								require("telescope.actions").move_selection_next,
+								actions.move_selection_next,
 								type = "action",
 								opts = { nowait = true, silent = true },
 							},
 							["<C-k>"] = {
-								require("telescope.actions").move_selection_previous,
+								actions.move_selection_previous,
 								type = "action",
 								opts = { nowait = true, silent = true },
 							},
@@ -48,14 +54,12 @@ return {
 				},
 			})
 
-			local builtin = require("telescope.builtin")
-
 			-- Enable telescope fzf native, if installed
-			pcall(require("telescope").load_extension, "fzf")
+			pcall(telescope.load_extension, "fzf")
 
 			vim.keymap.set("n", "<leader>f/", function()
 				-- You can pass additional configuration to telescope to change theme, layout, etc.
-				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+				builtin.current_buffer_fuzzy_find(themes.get_dropdown({
 					winblend = 10,
 					previewer = false,
 				}))
