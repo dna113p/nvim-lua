@@ -21,9 +21,10 @@ return {
 			telescope.setup({
 				defaults = {
 					path_display = { "smart" },
+					dynamic_preview_title = true,
 					layout_config = {
-						height = 0.95,
-						width = 0.90,
+						height = 0.99,
+						width = 0.99,
 					},
 					vimgrep_arguments = {
 						"rg",

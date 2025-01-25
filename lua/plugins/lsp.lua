@@ -167,7 +167,7 @@ return {
 
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"emmet_ls",
+					-- "emmet_ls",
 					"lua_ls",
 					"rust_analyzer",
 					"markdown_oxide",
