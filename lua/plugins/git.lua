@@ -2,8 +2,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim", -- git status in gutters
 		config = function()
-			local gitsigns = require("gitsigns")
-			gitsigns.setup({
+			require("gitsigns").setup({
 				signs = {
 					add = { text = "+" },
 					change = { text = "~" },
@@ -11,9 +10,12 @@ return {
 					topdelete = { text = "‾" },
 					changedelete = { text = "~" },
 				},
+				on_attach = function()
+					local gitsigns = require("gitsigns")
+					vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk)
+					vim.keymap.set("n", "<leader>bl", gitsigns.blame_line)
+				end,
 			})
-			vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk)
-			vim.keymap.set("n", "<leader>bl", gitsigns.blame_line)
 		end,
 	},
 
