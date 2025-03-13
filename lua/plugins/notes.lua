@@ -1,7 +1,7 @@
 return {
   {
     "tools-life/taskwiki",
-    enabled = ! vim.g.is_windows,
+    enabled = not vim.g.is_windows,
     config = function()
       -- Execute this command when Neovim starts, setting the Taskwiki sort order
       vim.g.taskwiki_sort_orders = {
