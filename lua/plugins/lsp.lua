@@ -9,6 +9,9 @@ return {
 	-- 	end,
 	-- },
 	{
+		"b0o/schemastore.nvim"
+	},
+	{
 		"supermaven-inc/supermaven-nvim",
 		config = function()
 			require("supermaven-nvim").setup({
@@ -203,6 +206,14 @@ return {
 					vtsls = function()
 						require("lspconfig").vtsls.setup({
 							cmd = { "volta", "run", "vtsls", "--stdio" },
+						})
+					end,
+
+					jsonls = function()
+						require 'lspconfig'.jsonls.setup({
+							filetypes = {
+								'json', 'jsonc', 'toml'
+							},
 						})
 					end,
 				},

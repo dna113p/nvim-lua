@@ -16,7 +16,7 @@ return {
 		end,
 	},
 
-	{ "tpope/vim-sleuth" }, -- automatically tries to adjust spacing based on file heuristics
+	{ "tpope/vim-sleuth" },      -- automatically tries to adjust spacing based on file heuristics
 
 	{ "chaoren/vim-wordmotion" }, -- changes word jumps for CamelCase and underscore
 
@@ -57,12 +57,10 @@ return {
 		"nvim-lualine/lualine.nvim", -- Fancier statusline
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 		config = function()
-			local noir = require("noirbuddy.plugins.lualine")
 			require("lualine").setup({
 				options = {
 					icons_enabled = true,
-					-- theme = 'catppuccin',
-					theme = noir.theme,
+					theme = 'catppuccin',
 					component_separators = "|",
 					section_separators = "",
 				},
