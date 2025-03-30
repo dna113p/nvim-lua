@@ -20,25 +20,6 @@ return {
 
 	{ "chaoren/vim-wordmotion" }, -- changes word jumps for CamelCase and underscore
 
-	-- {
-	-- 	"lukas-reineke/indent-blankline.nvim", -- indentation guides
-	-- 	main = "ibl",
-	-- 	config = function()
-	-- 		local highlight = {
-	-- 			"CursorColumn",
-	-- 			"Whitespace",
-	-- 		}
-	-- 		require("ibl").setup({
-	-- 			indent = { highlight = highlight, char = "" },
-	-- 			whitespace = {
-	-- 				highlight = highlight,
-	-- 				remove_blankline_trail = false,
-	-- 			},
-	-- 			scope = { enabled = false },
-	-- 		})
-	-- 	end,
-	-- },
-
 	{
 		"numToStr/Comment.nvim", -- comment toggling
 		config = function()
@@ -88,6 +69,31 @@ return {
 		"windwp/nvim-autopairs", -- auto closes brackets/qutoes
 		config = function()
 			require("nvim-autopairs").setup()
+		end,
+	},
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "VeryLazy", -- Or `LspAttach`
+		priority = 1000,  -- needs to be loaded in first
+		config = function()
+			require("tiny-inline-diagnostic").setup()
+			vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
+		end,
+	},
+	{
+		"b0o/schemastore.nvim"
+	},
+	{
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup()
+		end,
+	},
+	{
+		"williamboman/mason.nvim",
+		lazy = false,
+		config = function()
+			require("mason").setup()
 		end,
 	},
 }
