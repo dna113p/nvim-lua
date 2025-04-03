@@ -1,5 +1,4 @@
 return {
-  -- cmd = { "volta", "run", "vtsls", "--stdio" },
   cmd = { "vtsls", "--stdio" },
   filetypes = {
     'javascript',
@@ -10,4 +9,15 @@ return {
     'typescript.tsx',
   },
   root_markers = { 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' },
+  settings = {
+    typescript = {
+      updateImportsOnFileMove = "always",
+    },
+    javascript = {
+      updateImportsOnFileMove = "always",
+    },
+    vtsls = {
+      enableMoveToFileCodeAction = true,
+    },
+  }
 }
