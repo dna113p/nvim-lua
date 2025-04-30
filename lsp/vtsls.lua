@@ -7,6 +7,7 @@ return {
     'typescript',
     'typescriptreact',
     'typescript.tsx',
+    'html',
   },
   root_markers = { 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' },
   settings = {

@@ -1,13 +1,15 @@
-vim.lsp.enable({ 'luals', 'vtsls', 'jsonls', 'gopls', 'cssls', 'ruff' })
+vim.lsp.enable({ 'luals', 'vtsls', 'jsonls', 'gopls', 'cssls', 'cssvars', 'ruff', "tailwind-css", "openscad" })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local opts = function(d) return { buffer = args.buf, desc = d and "LSP: " .. d } end
 
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("[G]oto [d]efinition"))
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("[G]oto [D]eclaration"))
+    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts("[G]oto [T]ype Definition"))
     vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts("[G]oto [I]mplementation"))
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("[R]e[n]ame"))
+
     vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts("Rename"))
-    vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts("Type [D]efinition"))
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts("[C]ode [A]ction"))
 
     -- Telescope
@@ -21,7 +23,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set("n", "<leader>K", vim.lsp.buf.signature_help, opts("Signature Documentation"))
 
     -- Lesser used LSP functionality
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts("[G]oto [D]eclaration"))
+
 
     -- Create a command `:Format` local to the LSP buffer
     vim.api.nvim_buf_create_user_command(args.buf, "Format", function(_)

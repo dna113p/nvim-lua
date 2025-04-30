@@ -4,8 +4,6 @@ local Treesitter = {
 }
 
 function Treesitter.config()
-
-
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = (function()
@@ -31,7 +29,9 @@ function Treesitter.config()
     end)(),
 
 
-    highlight = { enable = true },
+    highlight = {
+      enable = true,
+    },
     indent = { enable = true, disable = { 'python' } },
     incremental_selection = {
       enable = true,
@@ -87,11 +87,10 @@ function Treesitter.config()
       },
     },
   }
-
 end
 
 return {
   Treesitter,
-  {'nvim-treesitter/nvim-treesitter-textobjects'},
-  {'nvim-treesitter/nvim-treesitter-context'}
+  { 'nvim-treesitter/nvim-treesitter-textobjects' },
+  { 'nvim-treesitter/nvim-treesitter-context' }
 }

@@ -56,14 +56,14 @@ return {
 		end,
 	},
 
-	{
-		"karb94/neoscroll.nvim", -- smooth scroll for things like C-u, C-d
-		config = function()
-			require("neoscroll").setup({
-				easing_function = "sine",
-			})
-		end,
-	},
+	-- {
+	-- 	"karb94/neoscroll.nvim", -- smooth scroll for things like C-u, C-d
+	-- 	config = function()
+	-- 		require("neoscroll").setup({
+	-- 			easing_function = "sine",
+	-- 		})
+	-- 	end,
+	-- },
 
 	{
 		"windwp/nvim-autopairs", -- auto closes brackets/qutoes
@@ -83,12 +83,12 @@ return {
 	{
 		"b0o/schemastore.nvim"
 	},
-	{
-		"j-hui/fidget.nvim",
-		config = function()
-			require("fidget").setup()
-		end,
-	},
+	-- {
+	-- 	"j-hui/fidget.nvim",
+	-- 	config = function()
+	-- 		require("fidget").setup()
+	-- 	end,
+	-- },
 	{
 		"williamboman/mason.nvim",
 		lazy = false,
