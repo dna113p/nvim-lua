@@ -4,11 +4,20 @@ return {
 		config = function()
 			require("gitsigns").setup({
 				signs = {
-					add = { text = "+" },
-					change = { text = "~" },
-					delete = { text = "_" },
-					topdelete = { text = "‾" },
-					changedelete = { text = "~" },
+					add          = { text = '┃' },
+					change       = { text = '┃' },
+					delete       = { text = '_' },
+					topdelete    = { text = '‾' },
+					changedelete = { text = '~' },
+					untracked    = { text = '┆' },
+				},
+				signs_staged = {
+					add          = { text = '┃' },
+					change       = { text = '┃' },
+					delete       = { text = '_' },
+					topdelete    = { text = '‾' },
+					changedelete = { text = '~' },
+					untracked    = { text = '┆' },
 				},
 				on_attach = function()
 					local gitsigns = require("gitsigns")
@@ -23,10 +32,14 @@ return {
 		"NeogitOrg/neogit",
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- required
-			"sindrets/diffview.nvim",
-			"nvim-telescope/telescope.nvim",
+			"sindrets/diffview.nvim", -- optional - Diff integration
+
+			-- Only one of these is needed.
+			"nvim-telescope/telescope.nvim", -- optional
+			"ibhagwan/fzf-lua",           -- optional
+			"echasnovski/mini.pick",      -- optional
+			"folke/snacks.nvim",          -- optional
 		},
-		config = true,
 	},
 
 	{
