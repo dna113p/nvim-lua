@@ -96,4 +96,5 @@ return {
 			require("mason").setup()
 		end,
 	},
+	{ 'echasnovski/mini.align', version = false }
 }
