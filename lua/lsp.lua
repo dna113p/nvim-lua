@@ -1,4 +1,4 @@
-vim.lsp.enable({ 'luals', 'vtsls', 'jsonls', 'gopls', 'cssls', 'cssvars', 'ruff', "tailwind-css", "openscad" })
+vim.lsp.enable({ 'luals', 'vtsls', 'jsonls', 'gopls', 'cssls', 'cssvars', 'ruff', "tailwind-css", "openscad", "nixd" })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
