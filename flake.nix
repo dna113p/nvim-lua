@@ -39,21 +39,17 @@
         nodePackages.vscode-json-languageserver # jsonls
         gopls # gopls
         vscode-langservers-extracted # cssls
-        # cssvars is likely css-variables-language-server from npm
-        nodePackages.css-variables-language-server
+        nodePackages.css-variables-ls
         ruff-lsp # ruff
         nodePackages.tailwindcss-language-server # tailwind-css
         nixd # nixd
-        # openscad-lsp is not in nixpkgs. You may need to package it yourself.
 
         # Formatters & Linters from your plugins
         stylua
         nodePackages.prettier
         prettierd
         nodePackages.eslint_d
-        go # for gofmt
-        # Provides rust-analyzer (for LSP) and rustfmt (for formatting)
-        (rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; })
+        go
       ];
     };
   };
