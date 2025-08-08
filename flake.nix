@@ -3,11 +3,19 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = { self, nixpkgs, ... }:
+  outputs = { self, nixpkgs, neovim-nightly-overlay, ... }:
+  let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [ neovim-nightly-overlay.overlays.default ];
+    };
+  in
   {
-    homeManagerModules.default = { config, pkgs, lib, inputs, ... }: {
+    homeManagerModules.default = { config, lib, inputs, ... }: {
       # This will symlink your neovim config to ~/.config/nvim
       # so you can edit it directly from your git checkout.
       xdg.configFile."nvim" = {
