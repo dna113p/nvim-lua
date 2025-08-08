@@ -35,20 +35,20 @@
       home.packages = with pkgs; [
         # LSPs from lua/lsp.lua
         lua-language-server # luals
-        nodePackages.typescript-language-server # vtsls
-        nodePackages.vscode-json-languageserver # jsonls
+        typescript-language-server # vtsls
+        vscode-json-languageserver # jsonls
         gopls # gopls
         vscode-langservers-extracted # cssls
-        nodePackages.css-variables-ls
-        ruff-lsp # ruff
-        nodePackages.tailwindcss-language-server # tailwind-css
+        ruff
+        tailwindcss-language-server # tailwind-css
         nixd # nixd
 
         # Formatters & Linters from your plugins
         stylua
-        nodePackages.prettier
+        prettier
         prettierd
-        nodePackages.eslint_d
+        eslint
+        eslint_d 
         go
       ];
     };
