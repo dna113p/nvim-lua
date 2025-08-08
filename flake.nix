@@ -28,7 +28,7 @@
         enable = true;
         withNodeJs = true;
         withPython3 = true;
-        package = neovim-nightly-overlay.packages.${system}.default;
+        package = pkgs.neovim-nightly;
       };
 
       # Packages for LSPs, formatters, and linters used in your config.
@@ -38,7 +38,7 @@
         nodePackages.typescript-language-server # vtsls
         nodePackages.vscode-json-languageserver # jsonls
         gopls # gopls
-        nodePackages.vscode-css-languageserver # cssls
+        vscode-langservers-extracted # cssls
         # cssvars is likely css-variables-language-server from npm
         nodePackages.css-variables-language-server
         ruff-lsp # ruff
