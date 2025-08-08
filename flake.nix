@@ -6,12 +6,8 @@
   };
 
   outputs = { self, nixpkgs, ... }:
-  let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in
   {
-    homeManagerModules.default = { config, lib, inputs, ... }: {
+    homeManagerModules.default = { config, pkgs, lib, inputs, ... }: {
       # This will symlink your neovim config to ~/.config/nvim
       # so you can edit it directly from your git checkout.
       xdg.configFile."nvim" = {
@@ -24,7 +20,7 @@
         enable = true;
         withNodeJs = true;
         withPython3 = true;
-        package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+        package = pkgs.neovim-nightly;
       };
 
       # Packages for LSPs, formatters, and linters used in your config.
