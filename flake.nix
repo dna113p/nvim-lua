@@ -33,6 +33,9 @@
 
       # Packages for LSPs, formatters, and linters used in your config.
       home.packages = with pkgs; [
+        cmake
+        gcc
+
         # LSPs from lua/lsp.lua
         lua-language-server # luals
         typescript-language-server # vtsls
