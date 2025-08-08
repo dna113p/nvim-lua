@@ -28,7 +28,7 @@
         enable = true;
         withNodeJs = true;
         withPython3 = true;
-        package = pkgs.neovim-nightly;
+        package = neovim-nightly-overlay.packages.${system}.default;
       };
 
       # Packages for LSPs, formatters, and linters used in your config.
