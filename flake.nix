@@ -36,7 +36,6 @@
         # LSPs from lua/lsp.lua
         lua-language-server # luals
         typescript-language-server # vtsls
-        vscode-json-languageserver # jsonls
         gopls # gopls
         vscode-langservers-extracted # cssls
         ruff
